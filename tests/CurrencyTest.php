@@ -20,6 +20,7 @@ class CurrencyTest extends TestCase
      */
     public function testExceptionIsRaisedForInvalidConstructorArgument()
     {
+        $this->expectException(InvalidArgumentException::class);
         new Currency(null);
     }
 
@@ -73,9 +74,9 @@ class CurrencyTest extends TestCase
     {
         $currencies = Currency::getCurrencies();
 
-        $this->assertInternalType('array', $currencies);
+        $this->assertIsArray($currencies);
         $this->assertArrayHasKey('EUR', $currencies);
-        $this->assertInternalType('array', $currencies['EUR']);
+        $this->assertIsArray($currencies['EUR']);
         $this->assertArrayHasKey('display_name', $currencies['EUR']);
         $this->assertArrayHasKey('numeric_code', $currencies['EUR']);
         $this->assertArrayHasKey('default_fraction_digits', $currencies['EUR']);

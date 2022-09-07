@@ -21,6 +21,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedForInvalidConstructorArguments()
     {
+        $this->expectException(InvalidArgumentException::class);
         new Money(null, new Currency('EUR'));
     }
 
@@ -32,6 +33,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedForInvalidConstructorArguments2()
     {
+        $this->expectException(InvalidArgumentException::class);
         new Money(0, null);
     }
 
@@ -42,6 +44,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedForInvalidConstructorArguments3()
     {
+        $this->expectException(InvalidArgumentException::class);
         Money::fromString(1234, new Currency('EUR'));
     }
 
@@ -168,6 +171,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsThrownForOverflowingAddition()
     {
+        $this->expectException(OverflowException::class);
         $a = new Money(PHP_INT_MAX, new Currency('EUR'));
         $b = new Money(2, new Currency('EUR'));
         $a->add($b);
@@ -184,6 +188,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedForIntegerOverflow()
     {
+        $this->expectException(OverflowException::class);
         $a = new Money(PHP_INT_MAX, new Currency('EUR'));
         $a->multiply(2);
     }
@@ -200,6 +205,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedWhenMoneyObjectWithDifferentCurrencyIsAdded()
     {
+        $this->expectException(CurrencyMismatchException::class);
         $a = new Money(1, new Currency('EUR'));
         $b = new Money(2, new Currency('USD'));
 
@@ -242,6 +248,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsThrownForOverflowingSubtraction()
     {
+        $this->expectException(OverflowException::class);
         $a = new Money(-PHP_INT_MAX, new Currency('EUR'));
         $b = new Money(2, new Currency('EUR'));
         $a->subtract($b);
@@ -259,6 +266,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedWhenMoneyObjectWithDifferentCurrencyIsSubtracted()
     {
+        $this->expectException(CurrencyMismatchException::class);
         $a = new Money(1, new Currency('EUR'));
         $b = new Money(2, new Currency('USD'));
 
@@ -310,6 +318,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedWhenMultipliedUsingInvalidRoundingMode()
     {
+        $this->expectException(InvalidArgumentException::class);
         $a = new Money(1, new Currency('EUR'));
         $a->multiply(2, null);
     }
@@ -376,6 +385,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedWhenTryingToAllocateToInvalidNumberOfTargets()
     {
+        $this->expectException(InvalidArgumentException::class);
         $a = new Money(0, new Currency('EUR'));
         $a->allocateToTargets(null);
     }
@@ -546,6 +556,7 @@ class MoneyTest extends TestCase
      */
     public function testExceptionIsRaisedWhenComparedToMoneyObjectWithDifferentCurrency()
     {
+        $this->expectException(CurrencyMismatchException::class);
         $a = new Money(1, new Currency('EUR'));
         $b = new Money(2, new Currency('USD'));
 
